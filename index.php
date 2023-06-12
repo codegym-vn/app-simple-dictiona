@@ -5,24 +5,7 @@ $dictionary = [
     "book" => "quyển vở",
     "computer" => "máy tính"
 ];
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $searchWord = $_POST["search"];
-    $flag = 0;
-    foreach ($dictionary as $word => $description) {
-        if ($word == $searchWord) {
-            echo "Từ: " . $word . ". <br/>Nghĩa của từ: " . $description;
-            echo "<br/>";
-            $flag = 1;
-        }
-    }
-
-    if ($flag == 0) {
-        echo "Không tìm thấy từ cần tra.";
-    }
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,5 +34,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="text" name="search" placeholder="Nhập từ cần tìm"/>
     <input type="submit" id="submit" value="Tìm"/>
 </form>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $searchWord = $_POST["search"];
+    $flag = 0;
+    foreach ($dictionary as $word => $description) {
+        if ($word == $searchWord) {
+            echo "Từ: " . $word . ". <br/>Nghĩa của từ: " . $description;
+            $flag = 1;
+            break;
+        }
+    }
+
+    if ($flag == 0) {
+        echo "Không tìm thấy từ cần tra.";
+    }
+}
+
+?>
 </body>
 </html>
